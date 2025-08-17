@@ -107,158 +107,6 @@ const experience = [
   },
 ];
 
-const bugQuotes = [
-  "Keep calm and test on! 🐞",
-  "Bug found? Celebrate! 🎉",
-  "Automate all the things! 🤖",
-  "A bug a day keeps the user away. 😜",
-  "Good testers find bugs, great testers break code! 💥",
-  "Test early, test often! 🧪",
-  "If it ain't tested, it ain't right! ✔️",
-  "Keep your bugs close and your tests closer. 🔍",
-  "Debugging: where the fun begins! 🛠️",
-  "Code hard, test harder! 💪",
-  "Eat, sleep, test, repeat. 🔄",
-  "Happy testing, happy coding! 😊",
-  "Finding bugs faster than you can say 'QA'! 🐞",
-  "Don't fear the bug, own it! 👊",
-  "Every bug is a new adventure! 🚀",
-  "Test it like you own it! 🏆",
-  "Quality is not an act, it's a habit. 🧘",
-  "Make bugs afraid of you! 😈",
-  "Break it till you make it! 🛠️",
-  "Bug-free is the way to be! ✨",
-  "Trust but verify! 🔎",
-  "Better a bug in the test than in production! 🔥",
-  "Testers: The unsung heroes. 🦸",
-  "Turn bugs into features! 😉",
-  "May your tests be swift and your bugs be tiny! ⚡",
-];
-
-function useRandomQuote(quotes) {
-  const [quote, setQuote] = useState(
-    quotes[Math.floor(Math.random() * quotes.length)]
-  );
-
-  useEffect(() => {
-    let timeoutId;
-
-    function scheduleNext() {
-      const nextIn = Math.random() * 5000 + 15000;
-      timeoutId = setTimeout(() => {
-        setQuote(quotes[Math.floor(Math.random() * quotes.length)]);
-        scheduleNext();
-      }, nextIn);
-    }
-
-    scheduleNext();
-
-    return () => clearTimeout(timeoutId);
-  }, [quotes]);
-
-  return quote;
-}
-
-function Bug({ size = 60, variant = 1 }) {
-  const quote = useRandomQuote(bugQuotes);
-
-  const [pos, setPos] = useState({
-    x: Math.random() * (window.innerWidth - size),
-    y: Math.random() * (window.innerHeight - size),
-  });
-
-  useEffect(() => {
-    let animationFrameId;
-    let direction = { x: 1, y: 1 };
-    let speed = 0.2 + Math.random() * 0.2;
-
-    function move() {
-      setPos((prev) => {
-        let nextX = prev.x + direction.x * speed;
-        let nextY = prev.y + direction.y * speed;
-
-        if (nextX < 0 || nextX > window.innerWidth - size) direction.x *= -1;
-        if (nextY < 0 || nextY > window.innerHeight - size) direction.y *= -1;
-
-        return {
-          x: Math.min(Math.max(nextX, 0), window.innerWidth - size),
-          y: Math.min(Math.max(nextY, 0), window.innerHeight - size),
-        };
-      });
-
-      animationFrameId = requestAnimationFrame(move);
-    }
-
-    animationFrameId = requestAnimationFrame(move);
-    return () => cancelAnimationFrame(animationFrameId);
-  }, [size]);
-
-  const styleBase = {
-    position: "fixed",
-    top: pos.y,
-    left: pos.x,
-    width: size,
-    height: size,
-    fontSize: size * 0.8,
-    cursor: "default",
-    userSelect: "none",
-    zIndex: 9999,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    pointerEvents: "auto",
-    color: variant === 1 ? "#7c3aed" : "#facc15",
-    filter:
-      variant === 1
-        ? "drop-shadow(0 0 4px #7c3aedaa)"
-        : "drop-shadow(0 0 6px #facc1588)",
-    transformOrigin: "center",
-    animation: variant === 1 ? "bugRotate1 6s linear infinite" : "bugRotate2 8s linear infinite reverse",
-  };
-
-  return (
-    <>
-      <style>{`
-        @keyframes bugRotate1 {
-          0% { transform: rotate(0deg); }
-          50% { transform: rotate(15deg); }
-          100% { transform: rotate(0deg); }
-        }
-        @keyframes bugRotate2 {
-          0% { transform: rotate(0deg); }
-          50% { transform: rotate(-15deg); }
-          100% { transform: rotate(0deg); }
-        }
-      `}</style>
-      <div style={styleBase} title={quote} aria-label={quote} role="img" aria-live="polite">
-        🐞
-        <div
-          style={{
-            position: "absolute",
-            bottom: `calc(100% + 8px)`,
-            left: "50%",
-            transform: "translateX(-50%)",
-            background: "rgba(124, 58, 237, 0.85)",
-            color: "white",
-            padding: "6px 10px",
-            borderRadius: "12px",
-            fontSize: 12,
-            whiteSpace: "nowrap",
-            pointerEvents: "none",
-            userSelect: "none",
-            boxShadow: "0 2px 8px rgba(0,0,0,0.3)",
-            opacity: 0.9,
-            fontWeight: "600",
-            zIndex: 10000,
-          }}
-        >
-          {quote}
-        </div>
-      </div>
-    </>
-  );
-}
-
 function AnimatedSection({ children }) {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.15 });
   return (
@@ -287,18 +135,20 @@ export default function Portfolio() {
 
   return (
     <>
+      {/* HEADER */}
       <header className="fixed top-0 left-0 right-0 bg-indigo-50/90 backdrop-blur-md shadow-lg z-50">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between px-6 py-4 gap-4 md:gap-0">
-          <div className="flex items-center gap-3 select-none cursor-default">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between 
+                        px-4 py-3 md:px-6 md:py-4 gap-3 md:gap-0">
+          <div className="flex items-center gap-2 md:gap-3 select-none cursor-default">
             <motion.h1
-              className="text-indigo-700 text-3xl font-extrabold tracking-wide"
+              className="text-indigo-700 text-2xl md:text-3xl font-extrabold tracking-wide"
               whileHover={{ scale: 1.1, rotate: [0, 10, -10, 0] }}
               transition={{ duration: 1 }}
             >
               Ajjayya G V
             </motion.h1>
             <motion.span
-              className="text-3xl"
+              className="text-2xl md:text-3xl"
               role="img"
               aria-label="waving robot"
               title="Hello! 👋"
@@ -308,10 +158,10 @@ export default function Portfolio() {
               🤖
             </motion.span>
           </div>
-          <p className="text-indigo-700 font-medium tracking-wide md:ml-6 text-center md:text-left">
+          <p className="text-indigo-700 text-sm md:text-base font-medium tracking-wide text-center md:text-left">
             QA Automation Tester | Python | Manual & Automation
           </p>
-          <div className="flex items-center gap-6 text-indigo-700 text-2xl justify-center md:justify-start">
+          <div className="flex items-center gap-4 md:gap-6 text-indigo-700 text-xl md:text-2xl justify-center md:justify-start">
             {contactLinks.map(({ icon, href, label }) => (
               <motion.a
                 key={label}
@@ -327,15 +177,16 @@ export default function Portfolio() {
                 {icon}
               </motion.a>
             ))}
-           
           </div>
         </div>
       </header>
 
-      <main className="pt-28 pb-16 max-w-6xl mx-auto px-6 md:px-12">
+      {/* MAIN CONTENT */}
+      <main className="pt-32 md:pt-28 pb-16 max-w-6xl mx-auto px-4 md:px-12">
+        {/* Profile Summary */}
         <AnimatedSection>
           <motion.h2
-            className="text-indigo-700 text-3xl font-bold mb-6 flex items-center gap-3 select-none cursor-default"
+            className="text-indigo-700 text-3xl font-bold mb-6 flex items-center gap-3"
             whileHover={{ scale: 1.1, rotate: [0, 15, -15, 0] }}
             transition={{ duration: 0.8 }}
           >
@@ -349,9 +200,10 @@ export default function Portfolio() {
           </p>
         </AnimatedSection>
 
+        {/* Skills */}
         <AnimatedSection>
           <motion.h2
-            className="text-indigo-700 text-3xl font-bold mb-10 flex items-center gap-3 select-none cursor-default"
+            className="text-indigo-700 text-3xl font-bold mb-10 flex items-center gap-3"
             whileHover={{ scale: 1.1, rotate: [0, 15, -15, 0] }}
             transition={{ duration: 0.8 }}
           >
@@ -371,7 +223,7 @@ export default function Portfolio() {
                         color: "#7c3aed",
                         textShadow: "0 0 8px #7c3aed",
                       }}
-                      whileTap={{ scale: 0.9, rotate: 0 }}
+                      whileTap={{ scale: 0.9 }}
                       className="bg-indigo-100 text-indigo-800 px-4 py-2 rounded-full text-sm font-semibold cursor-pointer select-none shadow-md transition-colors duration-300"
                     >
                       {skill}
@@ -383,9 +235,10 @@ export default function Portfolio() {
           </div>
         </AnimatedSection>
 
+        {/* Experience */}
         <AnimatedSection>
           <motion.h2
-            className="text-indigo-700 text-3xl font-bold mb-10 flex items-center gap-3 select-none cursor-default"
+            className="text-indigo-700 text-3xl font-bold mb-10 flex items-center gap-3"
             whileHover={{ scale: 1.1, rotate: [0, 15, -15, 0] }}
             transition={{ duration: 0.8 }}
           >
@@ -415,9 +268,10 @@ export default function Portfolio() {
           </div>
         </AnimatedSection>
 
+        {/* Projects */}
         <AnimatedSection>
           <motion.h2
-            className="text-indigo-700 text-3xl font-bold mb-12 flex items-center gap-3 select-none cursor-default"
+            className="text-indigo-700 text-3xl font-bold mb-12 flex items-center gap-3"
             whileHover={{ scale: 1.1, rotate: [0, 15, -15, 0] }}
             transition={{ duration: 0.8 }}
           >
@@ -480,6 +334,7 @@ export default function Portfolio() {
         </AnimatedSection>
       </main>
 
+      {/* Scroll to top */}
       <AnimatePresence>
         {showScrollTop && (
           <motion.button
@@ -497,11 +352,9 @@ export default function Portfolio() {
         )}
       </AnimatePresence>
 
-      <Bug size={60} variant={1} />
-      <Bug size={50} variant={2} />
-
+      {/* Footer */}
       <footer className="mt-16 py-8 bg-indigo-50 text-indigo-700 text-center font-semibold tracking-wide select-none">
-        Made with ❤️ and a little bit of 🐞 magic by Ajjayya G V — Keep calm and test on!
+        Made with ❤️ by Ajjayya G V — Keep calm and test on!
       </footer>
 
       <style>{`
