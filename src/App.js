@@ -55,7 +55,7 @@ const projects = [
     description:
       "Hybrid automation framework using Page Object Model & Data-Driven approach with HTML reports and Jenkins CI/CD integration.",
     tech: ["🐍 Python", "🕷️ Selenium", "🧪 Pytest", "📄 HTML Reports", "🛠️ Jenkins"],
-    repo: "https://github.com/iamajjayya/selenium-hybrid-framework",
+    repo: "https://github.com/iamajjayya/Automation_framework.git",
   },
   {
     title: "API Automation Framework",
@@ -63,10 +63,10 @@ const projects = [
     description:
       "Automated REST API testing with validation of endpoints, status codes, and response content.",
     tech: ["🐍 Python", "🧪 Pytest", "🌐 Requests", "🛠️ Jenkins"],
-    repo: "https://github.com/iamajjayya/api-automation",
+    repo: "https://github.com/iamajjayya/api_automation_framework.git",
   },
   {
-    title: "E-commerce Website",
+    title: "🛒 E-commerce Website",
     date: "Live",
     description:
       "React.js e-commerce platform with user authentication, product listings, shopping cart, and checkout flow.",
@@ -74,12 +74,12 @@ const projects = [
     live: "https://ecommerceajjayya.netlify.app/",
   },
   {
-    title: "Gym Application",
+    title: "💪 Gym Application",
     date: "Live",
     description:
       "Workout guide app using ExerciseDB and YouTube APIs for exercise videos and routines.",
     tech: ["⚛️ React.js", "🌐 REST API", "▶️ YouTube API"],
-    live: "https://your-gym-app-link.netlify.app/",
+    live: "https://gymajjayya.netlify.app/",
   },
 ];
 
@@ -327,15 +327,7 @@ export default function Portfolio() {
                 {icon}
               </motion.a>
             ))}
-            <a
-              href="/resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="ml-4 px-4 py-2 bg-gradient-to-r from-indigo-600 to-indigo-800 hover:from-indigo-700 hover:to-indigo-900 rounded-md text-white font-semibold shadow-md transition"
-              aria-label="Download Resume"
-            >
-              <FiDownload className="inline mr-1" /> Resume
-            </a>
+           
           </div>
         </div>
       </header>
