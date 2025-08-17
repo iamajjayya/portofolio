@@ -38,6 +38,7 @@ const skills = {
     "🌐 API Testing (Requests)",
     "⚙️ Jenkins CI/CD",
     "🔧 Git & GitHub",
+    "🌊 Docker"
   ],
   Tools: [
     "🗄️ SQL",
